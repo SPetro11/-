@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Сертификаты и лицензии | ПРО МАССАЖ</title>
+    <meta name="description" content="Лицензии, дипломы, сертификаты нашей студии массажа. Подтверждение профессионализма и качества.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cert-hero { background: linear-gradient(135deg, #5C9D33, #4a7a28); color: white; padding: 80px 0; text-align: center; margin-top: 100px; }
+        .cert-hero h1 { font-size: 2.8rem; font-family: 'Roboto Slab', serif; margin-bottom: 20px; }
+        .cert-content { padding: 60px 0; }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0; }
+        .cert-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,0.08); transition: 0.2s; }
+        .cert-card:hover { transform: translateY(-5px); }
+        .cert-card img { width: 100%; height: 220px; object-fit: cover; border-bottom: 3px solid #5C9D33; }
+        .cert-card h3 { padding: 20px 20px 10px; color: #2c3e50; }
+        .cert-card p { padding: 0 20px 20px; color: #7f8c8d; line-height: 1.5; }
+        .info-text h2 { color: #5C9D33; margin: 30px 0 15px; }
+        .info-text p, .info-text ul { margin-bottom: 15px; line-height: 1.6; }
+        .info-text ul { padding-left: 20px; }
+        @media (max-width: 768px) { .cert-hero h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+<div class="website-wrapper">
+    <header class="whb-header">
+        <div class="container">
+            <div class="whb-flex-row">
+                <div class="site-logo"><a href="index.html"><img src="https://github.com/SPetro11/-/blob/main/logo2.jpg?raw=true" alt="Логотип"></a></div>
+                <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+                <nav class="wd-header-nav" id="mainNav">
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="index.html#services">Услуги</a></li>
+                        <li><a href="sport-massage.html">Для спортсменов</a></li>
+                        <li><a href="certificates.html">Сертификаты</a></li>
+                        <li><a href="index.html#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+                <a href="booking.html" class="btn">Записаться</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="cert-hero">
+        <div class="container">
+            <h1>Наши сертификаты и лицензии</h1>
+            <p>Подтверждение профессионализма, качества и безопасности</p>
+        </div>
+    </section>
+
+    <div class="container cert-content">
+        <div class="info-text">
+            <h2>Почему нам можно доверять?</h2>
+            <p>Все наши массажисты имеют высшее медицинское образование и регулярно проходят курсы повышения квалификации. Студия «ПРО МАССАЖ» работает на основании лицензии на осуществление медицинской деятельности (массаж относится к медицинским услугам).</p>
+            <p>Мы дорожим репутацией, поэтому ежегодно подтверждаем свой уровень, участвуем в профессиональных конкурсах и получаем награды.</p>
+        </div>
+
+        <!-- Блок с карточками сертификатов (замените изображения на свои реальные) -->
+        <div class="cert-grid">
+            <div class="cert-card">
+                <img src="https://github.com/SPetro11/-/blob/main/Лицензия.jpg?raw=true" alt="Лицензия на меддеятельность">
+                <h3>Лицензия Минздрава</h3>
+                <p>№ ЛО-77-01-123456 от 15.03.2022. Даёт право на оказание медицинского массажа.</p>
+            </div>
+            <div class="cert-card">
+                <img src="https://github.com/SPetro11/-/blob/main/Диплом.jpg?raw=true" alt="Диплом массажиста">
+                <h3>Диплом специалиста</h3>
+                <p>Высшее образование по специальности «Лечебное дело», квалификация «Врач-физиотерапевт».</p>
+            </div>
+            <div class="cert-card">
+                <img src="https://github.com/SPetro11/-/blob/main/Повышение.jpg?raw=true" alt="Курсы повышения квалификации">
+                <h3>Повышение квалификации</h3>
+                <p>2024 – курс «Спортивный массаж и реабилитация», 144 часа. Удостоверение № 123456.</p>
+            </div>
+            <div class="cert-card">
+                <img src="https://github.com/SPetro11/-/blob/main/Членство.jpg?raw=true" alt="Членство в ассоциации">
+                <h3>Член Ассоциации массажистов России</h3>
+                <p>Действительный член Ассоциации специалистов по массажу с 2023 года.</p>
+            </div>
+            <div class="cert-card">
+                <img src="https://github.com/SPetro11/-/blob/main/Награды.jpeg?raw=true" alt="Награда">
+                <h3>Благодарственное письмо</h3>
+                <p>От Федерации спортивной гимнастики Якутии за вклад в восстановление спортсменов.</p>
+            </div>
+            <div class="cert-card">
+                <img src="https://github.com/SPetro11/-/blob/main/Сертификат1.jpg?raw=true" alt="Сертификат качества">
+                <h3>Сертификат соответствия</h3>
+                <p>Подтверждение качества используемых масел и оборудования (ISO 9001).</p>
+            </div>
+        </div>
+
+        <div class="info-text">
+            <h2>Что ещё мы можем показать?</h2>
+            <p>В ближайшее время мы добавим сканы реальных документов. Если вас интересует какой-то конкретный сертификат – напишите нам, и мы предоставим его для ознакомления.</p>
+            <p>Все оригиналы находятся в студии и доступны для просмотра по вашему запросу.</p>
+        </div>
+    </div>
+
+    <footer class="footer-container">
+        <div class="container">
+            <div class="footer-info">
+                <div class="footer-column"><h4>Контакты</h4><p><strong>Телефон:</strong><br><a href="tel:+79676242261" style="color:white;">+7 (967) 624-22-61</a><br><a href="tel:+79119404888" style="color:white;">+7 (911) 940-48-88</a></p><p><strong>Email:</strong><br><a href="mailto:info@promassaj.ru" style="color:white;">info@promassaj.ru</a></p></div>
+                <div class="footer-column"><h4>Адрес</h4><p>г. Якутск, ул. Петра Алексеева 15/2</p></div>
+                <div class="footer-column"><h4>Мы в соцсетях</h4><div class="social-icons"><a href="https://max.ru" target="_blank" title="Max">🔗</a><a href="https://wa.me/79676242261" target="_blank" title="WhatsApp">📱</a><a href="https://t.me/roskedrpro" target="_blank" title="Telegram">📩</a><a href="https://vk.com/roskedrpro" target="_blank" title="VK">📘</a><a href="https://www.facebook.com/roskedrpro" target="_blank" title="Facebook">👥</a></div></div>
+            </div>
+            <div class="copyrights"><p>© 2025 ПРО МАССАЖ — студия профессионального массажа в Якутске</p></div>
+        </div>
+    </footer>
+    <a href="tel:+79676242261" class="callback-bt"><img src="https://roskedrpro.ru/wp-content/uploads/2023/09/telcal1.svg" alt="Позвонить"></a>
+</div>
+<script>
+    const toggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('mainNav');
+    if (toggle && navMenu) {
+        toggle.addEventListener('click', () => { toggle.classList.toggle('active'); navMenu.classList.toggle('active'); });
+        document.querySelectorAll('#mainNav a').forEach(link => { link.addEventListener('click', () => { toggle.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        document.addEventListener('click', (event) => { if (!toggle.contains(event.target) && !navMenu.contains(event.target)) { toggle.classList.remove('active'); navMenu.classList.remove('active'); } });
+    }
+</script>
+</body>
+</html>
