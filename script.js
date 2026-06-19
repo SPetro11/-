@@ -1,5 +1,4 @@
 // ========== СЛАЙДЕР ==========
-// ========== СЛАЙДЕР ==========
 (function() {
     const slides = document.querySelectorAll('.wd-slide');
     const dots = document.querySelectorAll('.dot');
@@ -69,17 +68,22 @@
     const toggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('mainNav');
     if (toggle && navMenu) {
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             toggle.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
+
+        // Закрываем при клике на ссылку
         document.querySelectorAll('#mainNav a').forEach(link => {
             link.addEventListener('click', () => {
                 toggle.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
-        document.addEventListener('click', (event) => {
+
+        // Закрываем при клике вне меню
+        document.addEventListener('click', function(event) {
             if (!toggle.contains(event.target) && !navMenu.contains(event.target)) {
                 toggle.classList.remove('active');
                 navMenu.classList.remove('active');
@@ -113,18 +117,25 @@ async function fetchRealWeather() {
         const feelsLike = Math.round(temp - (wind * 0.2));
         const now = new Date();
         const currentHour = now.getHours();
-        const humidity = data.hourly.relativehumidity_2m[currentHour] || '--';
+        const humidity = data.hourly?.relativehumidity_2m?.[currentHour] || '--';
 
-        document.getElementById('currentTemp').innerText = temp;
-        document.getElementById('weatherDesc').innerText = desc;
-        document.getElementById('windSpeed').innerText = wind + ' м/с';
-        document.getElementById('humidity').innerText = humidity + '%';
-        document.getElementById('feelsLike').innerText = feelsLike + '°';
-        document.getElementById('weatherIcon').innerText = icon;
+        const tempEl = document.getElementById('currentTemp');
+        const descEl = document.getElementById('weatherDesc');
+        const windEl = document.getElementById('windSpeed');
+        const humEl = document.getElementById('humidity');
+        const feelsEl = document.getElementById('feelsLike');
+        const iconEl = document.getElementById('weatherIcon');
+
+        if (tempEl) tempEl.innerText = temp;
+        if (descEl) descEl.innerText = desc;
+        if (windEl) windEl.innerText = wind + ' м/с';
+        if (humEl) humEl.innerText = humidity + '%';
+        if (feelsEl) feelsEl.innerText = feelsLike + '°';
+        if (iconEl) iconEl.innerText = icon;
 
         const daily = data.daily;
         const forecastContainer = document.getElementById('weatherForecast');
-        if (forecastContainer) {
+        if (forecastContainer && daily) {
             forecastContainer.innerHTML = '';
             for (let i = 0; i < daily.time.length; i++) {
                 const date = new Date(daily.time[i]);
@@ -152,163 +163,16 @@ async function fetchRealWeather() {
         }
     } catch (error) {
         console.error('Погода не загружена:', error);
-        document.getElementById('weatherDesc').innerText = 'Не удалось загрузить';
+        const descEl = document.getElementById('weatherDesc');
+        if (descEl) descEl.innerText = 'Не удалось загрузить';
     }
 }
 
+// Загружаем погоду сразу и каждые 30 минут
 fetchRealWeather();
 setInterval(fetchRealWeather, 1800000);
 
 // ========== РЕЖИМ РАБОТЫ ==========
-(function() {
-    function updateWorkingStatus() {
-        const now = new Date();
-        const day = now.getDay();
-        const hours = now.getHours();
-        const mins = now.getMinutes();
-        const timeNow = hours * 60 + mins;
-
-        const weekCard = document.getElementById('weekdaysCard');
-        const satCard = document.getElementById('saturdayCard');
-        const sunCard = document.getElementById('sundayCard');
-
-        [weekCard, satCard, sunCard].forEach(c => c?.classList.remove('current'));
-
-        let status = '';
-        if (day >= 1 && day <= 5) {
-            if (weekCard) weekCard.classList.add('current');
-            const start = 9 * 60;
-            const breakStart = 13 * 60;
-            const breakEnd = 14 * 60;
-            const close = 18 * 60;
-            if (timeNow >= start && timeNow < breakStart) {
-                status = '🟢 Сейчас открыто (до перерыва 13:00)';
-            } else if (timeNow >= breakStart && timeNow < breakEnd) {
-                status = '🟡 Сейчас перерыв до 14:00';
-            } else if (timeNow >= breakEnd && timeNow < close) {
-                status = '🟢 Сейчас открыто (до 18:00)';
-            } else {
-                status = '🔴 Закрыто, приходите завтра с 9:00';
-            }
-        } else if (day === 6) {
-            if (satCard) satCard.classList.add('current');
-            if (timeNow >= 9 * 60 && timeNow < 16 * 60) {
-                status = '🟢 Сейчас открыто (суббота до 16:00)';
-            } else {
-                status = '🔴 Суббота: работаем до 16:00';
-            }
-        } else {
-            if (sunCard) sunCard.classList.add('current');
-            status = '🔴 Воскресенье — выходной';
-        }
-
-        const statusText = document.getElementById('statusText');
-        if (statusText) statusText.innerText = status;
-
-        const currentTimeEl = document.getElementById('currentTime');
-        if (currentTimeEl) {
-            currentTimeEl.innerText = now.toLocaleTimeString('ru-RU');
-        }
-    }
-
-    updateWorkingStatus();
-    setInterval(updateWorkingStatus, 1000);
-})();
-
-// ========== ПЛАВНАЯ ПРОКРУТКА ==========
-(function() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                const headerOffset = 100;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
-        });
-    });
-})();
-
-// ========== МОБИЛЬНОЕ МЕНЮ ==========
-(function() {
-    const toggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('mainNav');
-    if (toggle && navMenu) {
-        toggle.addEventListener('click', () => {
-            toggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-        document.querySelectorAll('#mainNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                toggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-        document.addEventListener('click', (event) => {
-            if (!toggle.contains(event.target) && !navMenu.contains(event.target)) {
-                toggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    }
-})();
-
-// ========== ПОГОДА (ДЕМО-ДАННЫЕ) ==========
-(function() {
-    const weather = {
-        temp: -17,
-        feels: -21,
-        desc: 'Снег с прояснениями',
-        wind: 3.2,
-        humidity: 79,
-        icon: '❄️'
-    };
-    const forecast = [
-        { day: 'Сегодня', high: -12, low: -22, icon: '🌨️' },
-        { day: 'Завтра', high: -14, low: -23, icon: '❄️' },
-        { day: 'Ср', high: -10, low: -19, icon: '⛅' },
-        { day: 'Чт', high: -7, low: -16, icon: '☀️' },
-        { day: 'Пт', high: -5, low: -14, icon: '☀️' }
-    ];
-
-    function updateWeatherUI() {
-        document.getElementById('currentTemp').innerText = weather.temp;
-        document.getElementById('weatherDesc').innerText = weather.desc;
-        document.getElementById('windSpeed').innerText = weather.wind + ' м/с';
-        document.getElementById('humidity').innerText = weather.humidity + '%';
-        document.getElementById('feelsLike').innerText = weather.feels + '°';
-        document.getElementById('weatherIcon').innerText = weather.icon;
-
-        const container = document.getElementById('weatherForecast');
-        if (container) {
-            container.innerHTML = forecast.map(f => `
-                <div class="forecast-card">
-                    <div class="forecast-day">${f.day}</div>
-                    <div class="forecast-icon">${f.icon}</div>
-                    <div class="forecast-temp">
-                        <span class="temp-high">${f.high}°</span>
-                        <span class="temp-low">${f.low}°</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
-
-    updateWeatherUI();
-    // Обновление погоды каждые 30 минут (имитация)
-    setInterval(() => {
-        weather.temp += (Math.random() * 2 - 1).toFixed(1) * 1;
-        weather.temp = Math.min(-5, Math.max(-30, weather.temp));
-        weather.feels = weather.temp - 4;
-        updateWeatherUI();
-    }, 1800000);
-})();
-
-// ========== РЕЖИМ РАБОТЫ И ОНЛАЙН-СТАТУС ==========
 (function() {
     function updateWorkingStatus() {
         const now = new Date();
